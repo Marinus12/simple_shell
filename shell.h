@@ -76,8 +76,8 @@ typedef struct passinfo
 	int err_num;
 	int linecount_flag;
 	char *fname;
-	char *env;
-	char *history;
+	list_t *env;
+	list_t *history;
 	list_t *alias;
 	char **environ;
 	int env_changed;
@@ -127,6 +127,7 @@ int _putsfd(char *str, int fd);
 int _strlen(char *);
 int _strcmp(char *, char *);
 char *starts_with(const char *, const char *);
+char *_strcat(char *, char *);
 
 /*toem_exits.c*/
 char *_strncpy(char *, char *, int);
