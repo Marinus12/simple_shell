@@ -12,15 +12,15 @@ char *_memset(char *bin, char sac, unsigned int n)
 	unsigned int i;
 
 	for (i = 0; i < n; i++)
-		s[i] = b;
-	return (s);
+		bin[i] = sac;
+	return (bin);
 }
 
 /**
   * freer - frees a string of strings
   * @pp: string of strings
   */
-void freer(char **p)
+void freer(char **pp)
 {
 	char **a = pp;
 
@@ -54,7 +54,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 	if (!p)
 		return (NULL);
 
-	old_size old_size < new_size ? old_size : new_size;
+	old_size = old_size < new_size ? old_size : new_size;
 	while (old_size--)
 		p[old_size] = ((char *)ptr)[old_size];
 	free(ptr);

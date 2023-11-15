@@ -18,9 +18,10 @@
 #define CMD_NORM	0
 #define CMD_OR		1
 #define CMD_CHAIN	3
+#define CMD_AND		2
 
 #define CONVERT_LOWERCASE	1
-#define CONVERT_UNSIGNRD	2
+#define CONVERT_UNSIGNED	2
 
 #define USE_GETLINE 0
 #define USE_STRTOK 0
@@ -91,6 +92,7 @@ typedef struct passinfo
 #define INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \ 0, 0, 0}
 
+
 /**
   * struct builtin - contain a builtin string and related function
   * @type: the builtin command flag
@@ -99,7 +101,7 @@ typedef struct passinfo
 typedef struct builtin
 {
 	char *type;
-	int (*func)(infpo_t *);
+	int (*func)(info_t *);
 } builtin_table;
 
 /* toem_shloop.c */
@@ -117,14 +119,14 @@ int loopsh(char **);
 
 /* toem_errors.c */
 void _eputs(char *);
-int _eputschar(char);
+int _eputchar(char);
 int _putfd(char c, int fd);
 int _putsfd(char *str, int fd);
 
 /*toem_string.c*/
 int _strlen(char *);
 int _strcmp(char *, char *);
-int *starts_with(const char *, const char *);
+char *starts_with(const char *, const char *);
 
 /*toem_exits.c*/
 char *_strncpy(char *, char *, int);
@@ -143,7 +145,7 @@ char **strtow2(char *, char);
 
 /*toem_realloc.c*/
 char *_memset(char *, char, unsigned int);
-char freer(char **);
+void freer(char **);
 void *_realloc(void *, unsigned int, unsigned int);
 
 /*toem_memory.c*/
@@ -159,7 +161,7 @@ int _integers(char *);
 int erratoi(char *);
 void print_error(info_t *, char *);
 int print_d(int, int);
-char *convert_number(ong int int, int);
+char *convert_number(long int, int, int);
 void remove_comments(char *);
 
 /* toem_builtin.c */

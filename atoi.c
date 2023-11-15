@@ -19,7 +19,7 @@ int output(info_t *input)
 int _delimeter(char i, char *d)
 {
 	while (*d)
-		if (*d++ == c)
+		if (*d++ == i)
 			return (1);
 	return (0);
 }
