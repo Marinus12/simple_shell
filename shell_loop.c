@@ -32,7 +32,7 @@ int hsh(info_t *info, char **av)
 	}
 	write_history(info);
 	free_info(info, 1);
-	if (!interactive(info) && info->status)
+	if (!output(info) && info->status)
 		exit(info->status);
 	if (builtin_ret == -2)
 	{
@@ -55,7 +55,7 @@ int find_builtin(info_t *info)
 {
 	int i, built_in_ret = -1;
 	builtin_table builtinb[] = {
-		{"exit", _exit},
+		{"exit", _exitshell},
 		{"env", _myenv},
 		{"help", _chdir_p},
 		{"history", _myhistory},
@@ -106,7 +106,7 @@ void find_cmd(info_t *info)
 	}
 	else
 	{
-		if ((interactive(info) || _getenv(info, "PATH=")
+		if ((output(info) || _getenv(info, "PATH=")
 					|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
 			fork_cmd(info);
 		else if (*(info->arg) != '\n')
