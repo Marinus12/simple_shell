@@ -9,7 +9,7 @@
   */
 int _erratoi(char *s)
 {
-	int im = 0;
+	int i = 0;
 	unsigned long int result = 0;
 
 	if (*s == '+')

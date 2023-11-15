@@ -108,6 +108,7 @@ typedef struct builtin
 int hsh(info_t *, char **);
 int find_builtin(info_t *);
 void find_cmd(info_t *);
+void fork_cmd(info_t *);
 
 /*toem_parser.c */
 int is_cmd(info_t *, char *);
@@ -166,7 +167,7 @@ char *convert_number(long int, int, int);
 void remove_comments(char *);
 
 /* toem_builtin.c */
-int exit(info_t *);
+int _shellexit(info_t *);
 int _chdir(info_t *);
 int _chdir_p(info_t *);
 

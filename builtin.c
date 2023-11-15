@@ -5,13 +5,13 @@
  * @info: Structure containing potential arguments.
  * Return: exits with a given exit status (0) if info.argv[0] != "exit"
  */
-int exit(info_t *info)
+int _exitshell(info_t *info)
 {
 	int k;
 
 	if (info->argv[1])
 	{
-		k = _erratoi(info->argv[1]);
+		k = erratoi(info->argv[1]);
 		if (k == -1)
 		{
 			info->status = 2;
@@ -20,7 +20,7 @@ int exit(info_t *info)
 			_eputchar('\n');
 			return (1);
 		}
-		info->err_num = _erratoi(info->argv[1]);
+		info->err_num = erratoi(info->argv[1]);
 		return (-2);
 	}
 	info->err_num = -1;
@@ -32,10 +32,11 @@ int exit(info_t *info)
  * @info: Structure containing potential arguments.
  * Return: Always 0
  */
+
 int _chdir(info_t *info)
 {
 	char *o, *d, buffer[1024];
-	int chdir
+	int chdir_result;
 
 	o = getcwd(buffer, 1024);
 	if (!o)
@@ -44,10 +45,9 @@ int _chdir(info_t *info)
 	{
 		d = _getenv(info, "HOME=");
 		if (!d)
-			chdir =
-				chdir((d = _getenv(info, "PWD=")) ? d : "/");
+			chdir_result = chdir((d = _getenv(info, "PWD=")) ? d : "/");
 		else
-			chdir = chdir(d);
+			chdir_result = chdir(d);
 	}
 	else if (_strcmp(info->argv[1], "-") == 0)
 	{
@@ -58,12 +58,11 @@ int _chdir(info_t *info)
 			return (1);
 		}
 		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
-		chdir = 
-			chdir((d = _getenv(info, "OLDPWD=")) ? d : "/");
+		chdir_result = chdir((d = _getenv(info, "OLDPWD=")) ? d : "/");
 	}
 	else
-		chdir = chdir(info->argv[1]);
-	if (chdir == -1)
+		chdir_result = chdir(info->argv[1]);
+	if (chdir_result == -1)
 	{
 		print_error(info, "can't cd to ");
 		_eputs(info->argv[1]), _eputchar('\n');
