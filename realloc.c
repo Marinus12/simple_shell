@@ -2,8 +2,8 @@
 
 /**
   * *_memset - fils memory with a constant byte
-  * @s: the pointer to the memory area
-  * @b: byte to fill @s with
+  * @sac: the pointer to the memory area
+  * @bin: byte to fill @s with
   * @n: the amount of bythe to be filled
   * Return: (s) a pointer to the memory area s
   */

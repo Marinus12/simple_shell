@@ -13,7 +13,7 @@ int output(info_t *input)
 /**
  * _delimeter - checks if character is a delimeter
  * @i: the char to check
- * @: the delimeter string
+ * @d: the delimeter string
  * Return: 1 if true, 0 if false
  */
 int _delimeter(char i, char *d)

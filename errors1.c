@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
-  * _erratoi - converts a string to an integer
+  * erratoi - converts a string to an integer
   * @s: the string to br converted
   *
   * Return: 0 if no number instring, converted number otherwise
   *	-1 on error
   */
-int _erratoi(char *s)
+int erratoi(char *s)
 {
 	int i = 0;
 	unsigned long int result = 0;

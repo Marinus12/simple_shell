@@ -10,6 +10,7 @@
 #include <limits.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <sys/stat.h>
 
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
@@ -201,7 +202,7 @@ char *get_history_file(info_t *info);
 int write_history(info_t *info);
 int read_history(info_t *info);
 int build_history_list(info_t *info, char *buf, int linecount);
-int renumber_histoy(info_t *info);
+int renumber_history(info_t *info);
 
 /*toem_lists.c*/
 list_t *add_node(list_t **, const char *, int);
@@ -222,5 +223,6 @@ int is_chain(info_t *, char *, size_t *);
 void check_chain(info_t *, char *, size_t *, size_t, size_t);
 int replace_alias(info_t *);
 int replace_string(char **, char *);
+int replace_vars(info_t *);
 
 #endif

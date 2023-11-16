@@ -3,7 +3,7 @@
 /**
   * _myenv - prints the current environment
   * @info: structure containing potential arguments, used to maintain
-  * 			constant function prototype
+  *		constant function prototype
   * Return: Always 0
   */
 int _myenv(info_t *info)
@@ -16,6 +16,8 @@ int _myenv(info_t *info)
   * _getenv - gets the value of an environ variable
   * @info: structure containing potential arguments, used to maintain
   * @name: env var name
+  *
+  * Return: the value
   */
 char *_getenv(info_t *info, const char *name)
 {
@@ -50,9 +52,11 @@ int _mysetenv(info_t *info)
 	return (1);
 }
 
-/** _myusetenv - removes an envronment variable
+/**
+  * _myunsetenv - removes an envronment variable
   * @info: structre containing potential arguments, used to maintain
   *		constant fuction prototype.
+  *
   * Return: Always 0
   */
 int _myunsetenv(info_t *info)
@@ -73,9 +77,10 @@ int _myunsetenv(info_t *info)
   * populate_env_list - populates env linked list
   * @info: structure contains potential args, used to maintain constant
   *		function prototype
+  *
   * Return: Always 0
   */
-int populate_env_lst(info_t *info)
+int populate_env_list(info_t *info)
 {
 	list_t *node = NULL;
 	size_t i;
