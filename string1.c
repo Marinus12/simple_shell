@@ -4,84 +4,80 @@
   * _strcpy - copies a string
   * @dest: the destination
   * @src: the source
-  *
   * Return: pointer to destination
   */
 char *_strcpy(char *dest, char *src)
 {
-	int i = 0;
+	int o = 0;
 
 	if (dest == src || src == 0)
 		return (dest);
-	while (src[i])
+	while (src[o])
 	{
-		dest[i] = src[i];
-		i++;
+		dest[o] = src[o];
+		o++;
 	}
-	dest[i] = 0;
+	dest[o] = 0;
 	return (dest);
 }
 
 /**
   * _strdup  - duplicates a string
-  * @str: the string to duplicate
-  *
+  * @s: the string to duplicate
   * Return: pointer to the duplicated string
   */
-char *_strdup(const char *str)
+char *_strdup(const char *s)
 {
-	int length = 0;
-	char *ret;
+	int len = 0;
+	char *r;
 
-	if (str == NULL)
+	if (s == NULL)
 		return (NULL);
-	while (*str++)
-		length++;
-	ret = malloc(sizeof(char) * (length + 1));
-	if (!ret)
+	while (*s++)
+		len++;
+	r = malloc(sizeof(char) * (len + 1));
+	if (!r)
 		return (NULL);
-	for (length++; length--;)
-		ret[length] = *--str;
-	return (ret);
+	for (len++; len--;)
+		r[len] = *--s;
+	return (r);
 }
 
 /**
   * _puts - prints an input string
-  * @str: the string to be printed
-  *
+  * @s: the string to be printed
   * Return: Nothing
   */
-void _puts(char *str)
+void _puts(char *s)
 {
-	int i = 0;
+	int o = 0;
 
-	if (!str)
+	if (!s)
 		return;
-	while (str[i] != '\0')
+	while (s[o] != '\0')
 	{
-		_putchar(str[i]);
-		i++;
+		_putchar(s[o]);
+		o++;
 	}
 }
 
 /**
   * _putchar - writes the character c to stdout
-  * @c: the character to print
-  *
+  * @y: the character to print
   * Return: On success 1
   * On error, -1 is returned, and errno is seet appropriately
   */
-int _putchar(char c)
+int _putchar(char y)
 {
-	static int i;
+	static int o;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	if (y == BUF_FLUSH || o >= WRITE_BUF_SIZE)
 	{
-		write(1, buf, i);
-		i = 0;
+		write(1, buf, o);
+		o = 0;
 	}
-	if (c != BUF_FLUSH)
-		buf[i++] = c;
+	if (y != BUF_FLUSH)
+		buf[o++] = y;
 	return (1);
 }

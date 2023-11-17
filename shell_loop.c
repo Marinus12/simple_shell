@@ -4,7 +4,6 @@
   * hsh - main shell loop
   * @info: the parameter & return info struct
   * @av: the argument vector from main()
-  *
   * Return: 0 on success, 1 on error, or error code
   */
 int hsh(info_t *info, char **av)
@@ -17,7 +16,7 @@ int hsh(info_t *info, char **av)
 		clear_info(info);
 		if (output(info))
 			_puts("$ ");
-		_eputchar(BUF_FLUSH);
+		_put_char(BUF_FLUSH);
 		ren = get_input(info);
 		if (ren != -1)
 		{
@@ -56,13 +55,13 @@ int find_builtin(info_t *info)
 	int i, built_in_ret = -1;
 	builtin_table builtinb[] = {
 		{"exit", _exitshell},
-		{"env", _myenv},
+		{"env", _curenv},
 		{"help", _chdir_p},
-		{"history", _myhistory},
-		{"setenv", _mysetenv},
-		{"unsetenv", _myunsetenv},
+		{"history", myhis},
+		{"setenv", _setnewenv},
+		{"unsetenv", _rmsetenv},
 		{"cd", _chdir},
-		{"alias", _myalias},
+		{"alias", builtin_alias},
 		{NULL, NULL}
 	};
 
@@ -79,7 +78,6 @@ int find_builtin(info_t *info)
 /**
   * find_cmd - finds a command in PATH
   * @info: the parameter & return info struct
-  *
   * Return: void
   */
 void find_cmd(info_t *info)
@@ -98,7 +96,7 @@ void find_cmd(info_t *info)
 			k++;
 	if (!k)
 		return;
-	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
+	path = find_path(info, valenv(info, "PATH="), info->argv[0]);
 	if (path)
 	{
 		info->path = path;
@@ -106,21 +104,20 @@ void find_cmd(info_t *info)
 	}
 	else
 	{
-		if ((output(info) || _getenv(info, "PATH=")
+		if ((output(info) || valenv(info, "PATH=")
 					|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
 			fork_cmd(info);
 		else if (*(info->arg) != '\n')
 		{
 			info->status = 127;
-			print_error(info, "notfound\n");
+			_printerr(info, "notfound\n");
 		}
 	}
 }
 
 /**
   * fork_cmd - forks an exec thread to run cmd
-  * @info: the parameter & return info struct
-  *
+  * @info: the parameter & return info struc
   * Return: void
   */
 void fork_cmd(info_t *info)
@@ -151,7 +148,7 @@ void fork_cmd(info_t *info)
 		{
 			info->status = WEXITSTATUS(info->status);
 			if (info->status == 126)
-				print_error(info, "Permission denied\n");
+				_printerr(info, "Permission denied\n");
 		}
 	}
 }

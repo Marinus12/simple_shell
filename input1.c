@@ -11,16 +11,16 @@ int _exitshell(info_t *info)
 
 	if (info->argv[1])
 	{
-		k = erratoi(info->argv[1]);
+		k = _atoi(info->argv[1]);
 		if (k == -1)
 		{
 			info->status = 2;
-			print_error(info, "Illegal number: ");
-			_eputs(info->argv[1]);
-			_eputchar('\n');
+			_printerr(info, "Illegal number: ");
+			_puts_str(info->argv[1]);
+			_put_char('\n');
 			return (1);
 		}
-		info->err_num = erratoi(info->argv[1]);
+		info->err_num = _atoi(info->argv[1]);
 		return (-2);
 	}
 	info->err_num = -1;
@@ -43,33 +43,33 @@ int _chdir(info_t *info)
 		_puts("TODO: >>getcwd failure emsg here<<\n");
 	if (!info->argv[1])
 	{
-		d = _getenv(info, "HOME=");
+		d = valenv(info, "HOME=");
 		if (!d)
-			chdir_result = chdir((d = _getenv(info, "PWD=")) ? d : "/");
+			chdir_result = chdir((d = valenv(info, "PWD=")) ? d : "/");
 		else
 			chdir_result = chdir(d);
 	}
 	else if (_strcmp(info->argv[1], "-") == 0)
 	{
-		if (!_getenv(info, "OLDPWD="))
+		if (!valenv(info, "OLDPWD="))
 		{
 			_puts(o);
 			_putchar('\n');
 			return (1);
 		}
-		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
-		chdir_result = chdir((d = _getenv(info, "OLDPWD=")) ? d : "/");
+		_puts(valenv(info, "OLDPWD=")), _putchar('\n');
+		chdir_result = chdir((d = valenv(info, "OLDPWD=")) ? d : "/");
 	}
 	else
 		chdir_result = chdir(info->argv[1]);
 	if (chdir_result == -1)
 	{
-		print_error(info, "can't cd to ");
-		_eputs(info->argv[1]), _eputchar('\n');
+		_printerr(info, "can't cd to ");
+		_puts_str(info->argv[1]), _put_char('\n');
 	}
 	else
 	{
-		_setenv(info, "OLDPWD", _getenv(info, "PWD="));
+		_setenv(info, "OLDPWD", valenv(info, "PWD="));
 		_setenv(info, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);
