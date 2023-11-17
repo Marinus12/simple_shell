@@ -52,7 +52,7 @@ int _setnewenv(info_t *info)
 }
 
 /**
-  * _myunsetenv - removes an envronment variable
+  * _rmsetenv - removes an envronment variable
   * @info: structre containing potential arguments, used to maintain
   * constant fuction prototype.
   * Return: Always 0

@@ -2,7 +2,7 @@
 
 /**
   * _atoi - converts a string to an integer
-  * @p(: the string to br converted
+  * @p: the string to br converted
   * Return: 0 if no number instring, converted number otherwise
   * -1 on error
   */
@@ -29,7 +29,7 @@ int _atoi(char *p)
 }
 
 /**
-  * print_err - prints an error message
+  * _printerr - prints an error message
   * @info: the parameter & return info struct
   * @t: string containing specified error type
   * Return: 0 if no numbets in string, converted number otherwise

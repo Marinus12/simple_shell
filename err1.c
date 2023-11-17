@@ -20,7 +20,7 @@ void _puts_str(char *str)
 
 /**
   * _put_char - writes the character c to stderr
-  * @c: the character to print
+  * @y: the character to print
   * Return: On success 1.
   * On error, -1 is returned, and errno is set appropriately
   */
@@ -41,7 +41,7 @@ int _put_char(char y)
 
 /**
   * _put_fd - write the character c to given fd
-  * @c: the character to print
+  * @y: the character to print
   * @fd: the filedescriptor to write to
   *
   * Return: On sccess 1.
